@@ -4,19 +4,16 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'anime': ['"Press Start 2P"', 'system-ui'],
-        'cyber': ['"VT323"', 'monospace'],
-        'sakura': ['"Inter"', 'sans-serif']
+        anime: ['"Press Start 2P"', 'sans-serif'],
+        cyber: ['"VT323"', 'monospace'],
+        sakura: ['Inter', 'system-ui'],
       },
       colors: {
         neon: {
           pink: '#ff00ff',
-          blue: '#00f0ff',
-          purple: '#8b00ff'
+          cyan: '#00ffff',
+          purple: '#9d00ff',
         }
-      },
-      backdropBlur: {
-        xs: '2px'
       }
     }
   }
