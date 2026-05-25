@@ -1,24 +1,16 @@
-import { injectTheme } from '../utils/themeEngine';
+import { applyTheme } from '../utils/themeEngine';
 import { storage } from '../utils/storage';
-
-let currentSettings: any = null;
-
-chrome.runtime.onMessage.addListener((message) => {
-  if (message.type === 'UPDATE_THEME') {
-    currentSettings = message.theme;
-    injectTheme(message.theme);
-  }
-});
 
 async function init() {
   const settings = await storage.get();
   const hostname = window.location.hostname;
+  const theme = settings.perSiteSettings[hostname] || settings.currentTheme;
 
-  const siteSettings = settings.perSiteSettings[hostname] || settings.currentTheme;
-
-  if (settings.enabled) {
-    injectTheme(siteSettings);
-  }
+  if (settings.enabled) applyTheme(theme);
 }
+
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg.type === 'UPDATE_THEME') applyTheme(msg.theme);
+});
 
 init();
