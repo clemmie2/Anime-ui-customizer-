@@ -2,7 +2,7 @@ export interface AnimeTheme {
   id: string;
   name: string;
   background: string;
-  font: string;
+  font: 'sakura' | 'anime' | 'cyber';
   accentColor: string;
   opacity: number;
   blur: number;
@@ -13,6 +13,5 @@ export interface UserSettings {
   enabled: boolean;
   currentTheme: AnimeTheme;
   customWallpapers: string[];
-  favoriteThemes: string[];
   perSiteSettings: Record<string, AnimeTheme>;
 }
