@@ -1,6 +1,6 @@
-export function injectTheme(theme: any) {
+export function applyTheme(theme: AnimeTheme) {
   const styleId = 'anime-ui-customizer-style';
-  let style = document.getElementById(styleId) as HTMLStyleElement;
+  let style = document.getElementById(styleId) as HTMLStyleElement | null;
 
   if (!style) {
     style = document.createElement('style');
@@ -9,32 +9,22 @@ export function injectTheme(theme: any) {
   }
 
   style.textContent = `
-    * {
+    * { 
       font-family: ${theme.font === 'anime' ? '"Press Start 2P"' : 
                    theme.font === 'cyber' ? '"VT323"' : 'Inter'}, sans-serif !important;
     }
-
     body, html {
-      background-image: url('${theme.background}') !important;
-      background-size: cover !important;
-      background-attachment: fixed !important;
-      position: relative;
+      background: url('${theme.background}') center/cover fixed !important;
     }
-
     body::before {
       content: '';
-      position: absolute;
+      position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, ${1 - theme.opacity});
+      background: rgba(0,0,20,${1-theme.opacity});
       backdrop-filter: blur(${theme.blur}px);
-      pointer-events: none;
       z-index: -1;
+      pointer-events: none;
     }
-
-    ${theme.glow ? `
-      a, button, h1, h2, h3 {
-        text-shadow: 0 0 10px ${theme.accentColor} !important;
-      }
-    ` : ''}
+    ${theme.glow ? `h1,h2,h3,a,button { text-shadow: 0 0 12px ${theme.accentColor}; }` : ''}
   `;
 }
