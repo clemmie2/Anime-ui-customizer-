@@ -1,0 +1,1 @@
+console.log('Anime UI Customizer Service Worker Loaded');
